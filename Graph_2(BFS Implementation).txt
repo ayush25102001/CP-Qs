@@ -1,0 +1,59 @@
+//BREADTH FIRST SEARCH:When we visit for the first time we push into the queue ant then print when we reach 
+                     //its neighbour we print it and remove from queue.
+#include<iostream>
+using namespace std;
+#include<map>
+#include<vector>
+#include<queue>
+map<int,vector<int>> g;
+void Add_Edge(int a,int b)
+{
+    g[a].push_back(b);
+    g[b].push_back(a);  //Bidirectional graph
+}
+void Display_Graph()
+{
+    for(auto x:g)
+    {
+        cout<<x.first<<"->";
+        for(auto y:x.second)
+        {
+            cout<<y<<" " ;
+        }
+        cout<<endl;
+    }
+    
+}
+void bfs(int src)
+{
+    queue<int> q;
+    map<int,int> chk;  //Maintaining a map to check if the node is visited
+    q.push(src);       //Initially pushing the src in queue
+    chk[src]=1;
+    while(!q.empty())  //We continue untill the queue gets empty
+    {
+        int node=q.front();   
+        cout<<node<<" ";
+        q.pop();
+        for(auto x:g[node])  //Visiting the neighbours of the current node
+        {
+            if(chk[x]==0)  //If not visited pushing into the queue
+            {
+                q.push(x);
+                chk[x]=1;  //Now gets visited
+            }
+        }
+    }
+}
+int main()
+{
+    Add_Edge(0,1);
+    Add_Edge(0,4);
+    Add_Edge(2,1);
+    Add_Edge(2,3);
+    Add_Edge(2,4);
+    Add_Edge(5,3);
+    Add_Edge(3,4);
+    //Display_Graph();
+    bfs(0);
+}

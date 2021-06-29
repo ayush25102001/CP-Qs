@@ -1,0 +1,95 @@
+//BREADTH FIRST SEARCH:Parent nodes/Distabce from source//Shortest path
+#include<iostream>
+using namespace std;
+#include<map>
+#include<vector>
+#include<queue>
+map<int,vector<int>> g;
+void Add_Edge(int a,int b)
+{
+    g[a].push_back(b);
+    g[b].push_back(a);  //Bidirectional graph
+}
+void Display_Graph()
+{
+    for(auto x:g)
+    {
+        cout<<x.first<<"->";
+        for(auto y:x.second)
+        {
+            cout<<y<<" " ;
+        }
+        cout<<endl;
+    }
+    
+}
+void path(int src,int des,map<int,vector<int>> p)
+{
+    cout<<des<<"<-";
+    for(auto x:p)
+    {
+        for(auto y:x.second)
+        {
+            
+            if(y==des)
+            {
+                cout<<x.first<<"<-";   //Finding the parent of child and the making the parent as child
+                                      //and then finding its parent
+                des=x.first;
+            }
+        }
+    }
+    cout<<src;
+    
+}
+void bfs(int src,int des)
+{
+    queue<int> q;
+    map<int,int> chk;  //Maintaining a map to check if the node is visited
+    q.push(src);       //Initially pushing the src in queue
+    chk[src]=1;
+    map<int,vector<int>> p;  //Maping node with its neighbours
+    map<int,int> d;
+    while(!q.empty())  //We continue untill the queue gets empty
+    {
+        int node=q.front();   
+        //cout<<node<<" ";
+        q.pop();
+        for(auto x:g[node])  //Visiting the neighbours of the current node
+        {
+            if(chk[x]==0)  //If not visited pushing into the queue
+            {
+                q.push(x);
+                chk[x]=1;  //Now gets visited
+                p[node].push_back(x);  //Mapping the neighbours with the parent node
+                d[x]=d[node]+1;
+                cout<<"Distance of "<<x<<" is "<<d[x]<<endl; //Here the shortest dist from source would
+                                                             //be computed as we enter the loop only when we
+                                                             //are visiting for the first time
+            }
+        }
+    }
+     for(auto x:p)  //Displaying the nodes and its neighbours
+    {
+        cout<<"Neighbours of "<<x.first<<" is/are:";
+        for(auto y:x.second)
+        {
+            cout<<y<<",";
+        }
+        cout<<endl;
+    }
+    int temp=des;
+    path(src,des,p);  //shortest Path
+}
+int main()
+{
+    Add_Edge(0,1);
+    Add_Edge(0,4);
+    Add_Edge(2,1);
+    Add_Edge(2,3);
+    Add_Edge(2,4);
+    Add_Edge(5,3);
+    Add_Edge(3,4);
+    //Display_Graph();
+    bfs(0,5);
+}

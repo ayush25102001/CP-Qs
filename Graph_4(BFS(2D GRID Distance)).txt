@@ -1,0 +1,71 @@
+//BFS(APPLICATION)
+  0 1 1 0
+  0 1 1 0
+  0 1 1 0
+  0 0 0 0  Algorithm that finds shortest distance from [0][0] to [0][3]
+           Can be used for any pt by changing the source and destination.
+  
+#include <iostream>
+using namespace std;
+#include<vector>
+#include<queue>
+int dis[100][100];
+int dx[]={1,-1,0,0};
+int dy[]={0,0,1,-1};
+int chk(int i,int j,int n,int m,string s[])
+{
+    if(i<0||j<0||i>=n||j>=n||s[i][j]=='1')
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+int bfs(int i,int j,int n,int m,string s[])
+{
+    queue<pair<int,int>> q;
+    q.push({i,j});
+    dis[0][0]=0;
+    while(!q.empty())
+    {
+        pair<int,int> p=q.front();
+        int x=p.first;
+        int y=p.second;
+        s[x][y]='1';
+        q.pop();
+        cout<<"{"<<x<<","<<y<<"}"<<endl;
+        for(int k=0;k<4;k++)
+        {
+            int xx=x+dx[k];
+            int yy=y+dy[k];
+            if(chk(xx,yy,n,m,s))
+            {
+                s[xx][yy]='1';
+                dis[xx][yy]=dis[x][y]+1;
+                q.push({xx,yy});   
+            }
+        }
+        
+    }
+    return dis[0][m-1];
+}
+int main() 
+{
+	int t=0;
+	cin>>t;
+	while(t--)
+	{
+	    int n,m;
+	    cin>>n>>m;
+	    string s[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>s[i];
+	    }
+	    int ans=bfs(0,0,n,m,s);
+	    cout<<ans<<endl;
+	}
+	return 0;
+}

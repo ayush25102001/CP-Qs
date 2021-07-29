@@ -2,8 +2,7 @@
   0 1 1 0
   0 1 1 0
   0 1 1 0
-  0 0 0 0  Algorithm that finds shortest distance from [0][0] to [0][3]
-           Can be used for any pt by changing the source and destination.
+  0 0 0 0  
   
 #include <iostream>
 using namespace std;

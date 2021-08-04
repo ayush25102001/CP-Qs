@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long
+void func(string s,int n)
+{
+    set<char> o;
+    for(int i=0;i<n;i++)
+    {
+        o.insert(s[i]);
+    }
+    for(int i=0;i<26;i++)
+    {
+        char temp=char('a'+i);
+        
+        if(o.find(temp)==o.end())
+        {
+            cout<<temp<<endl;
+            return;
+        }
+    }
+    set<string> t;   
+    for(int i=0;i<n-1;i++)
+    {
+        string ins="";
+        ins+=s[i];
+        ins+=s[i+1];
+        t.insert(ins);
+    }
+    for(int i=0;i<26;i++)
+    {
+        for(int j=0;j<26;j++)
+        {
+            string tempp="";
+            tempp+=char('a'+i);
+            tempp+=char('a'+j);
+            if(t.find(tempp)==t.end())
+            {
+                cout<<tempp<<endl;
+                return;
+            }
+        }
+    }
+    set<string> tt;
+    for(int i=0;i<n-2;i++)
+    {
+        string in="";
+        in+=s[i];
+        in+=s[i+1];
+        in+=s[i+2];
+        tt.insert(in);
+    }
+    for(int i=0;i<26;i++)
+    {
+        for(int j=0;j<26;j++)
+        {
+            string temppp="a";
+            temppp+=char('a'+i);
+            temppp+=char('a'+j);
+            if(tt.find(temppp)==tt.end())
+            {
+                cout<<temppp<<endl;
+                return;
+            }
+        }
+    }
+}
+int32_t main()
+{
+   int t=0;
+   cin>>t;
+   while(t--)
+   {
+       int n=0;
+       cin>>n;
+       string s;
+       cin>>s;
+       func(s,n);
+      
+   }
+   return 0;
+}

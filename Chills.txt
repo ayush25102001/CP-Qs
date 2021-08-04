@@ -1,0 +1,89 @@
+CODECHEF:
+April starters(Chef and the Hills):
+//Placing first in the middle and then placing symetrically on both sides
+
+
+#include<iostream>
+using namespace std;
+#include<cmath>
+#define ll long long int
+ll check(ll end1,ll end2,ll a[],ll n)
+{
+    ll dis=0;
+    for(ll i=0;i<n;i++)
+    {
+        dis+=max(abs(a[i]-end1),abs(a[i]-end2));
+    }
+    return dis;
+}
+int main() 
+{
+    int t=0;
+    cin>>t;
+    while(t--)
+    {
+        ll n,k;
+        cin>>n>>k;
+        ll a[n];
+        for(ll i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+        if((n%2!=0)&&(k%2!=0))
+        {
+            ll mid=n/2;
+            ll end1=a[mid]-k/2;
+            ll end2=a[mid]+k/2;
+            ll dis=check(end1,end2,a,n);
+            cout<<dis<<endl;
+        }
+        if((n%2!=0)&&(k%2==0))
+        {
+            ll mid=n/2;
+            ll end1=a[mid]-k/2;
+            ll end2=a[n/2]+(k/2-1);
+            ll dis1=check(end1,end2,a,n);
+            ll end3=a[n/2]-(k/2-1);
+            ll end4=a[n/2]+k/2;
+            ll dis2=check(end3,end4,a,n);
+            ll dis=min(dis1,dis2);
+            cout<<dis<<endl;
+        }
+        if(n%2==0&&k%2!=0)
+        {
+            ll mid1=n/2;
+            ll end1=a[n/2]-k/2;
+            ll end2=a[n/2]+k/2;
+            ll dis1=check(end1,end2,a,n);
+            ll mid2=(n/2)-1;
+            ll end3=a[mid2]-k/2;
+            ll end4=a[mid2]+k/2;
+            ll dis2=check(end3,end4,a,n);
+            ll dis=min(dis1,dis2);
+            cout<<dis<<endl;
+        }
+        if(n%2==0&&k%2==0)
+        {
+            ll mid1=n/2;
+            ll end1=a[n/2]-k/2;
+            ll end2=a[n/2]+(k/2-1);
+            ll dis1=check(end1,end2,a,n);
+            ll end3=a[n/2]-(k/2-1);
+            ll end4=a[n/2]+k/2;
+            ll dis2=check(end3,end4,a,n);
+            ll disc1=min(dis1,dis2);
+            ll mid2=n/2-1;
+            ll end11=a[mid2]-k/2;
+            ll end21=a[mid2]+(k/2-1);
+            ll dis11=check(end11,end21,a,n);
+            ll end31=a[mid2]-(k/2-1);
+            ll end41=a[mid2]+k/2;
+            ll dis21=check(end31,end41,a,n);
+            ll disc2=min(dis11,dis21);
+            ll ans=min(disc1,disc2);
+            cout<<ans<<endl;
+        }
+    }
+	
+	return 0;
+}

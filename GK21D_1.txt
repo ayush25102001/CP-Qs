@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long
+int32_t main()
+{
+   ios_base::sync_with_stdio(false);
+   cin.tie(NULL);
+   int t=0;
+   cin>>t;
+   int tt=t;
+   while(t--)
+   {
+       int a[3][3];
+       cin>>a[0][0]>>a[0][1]>>a[0][2];
+       cin>>a[1][0]>>a[1][2];
+       cin>>a[2][0]>>a[2][1]>>a[2][2];
+       int cnt=0;
+       if(2*a[0][1]==(a[0][0]+a[0][2]))
+       {
+           cnt++;
+       }
+       if(2*a[1][0]==(a[0][0]+a[2][0]))
+       {
+           cnt++;
+       }
+       if(2*a[2][1]==(a[2][0]+a[2][2]))
+       {
+           cnt++;
+       }
+       if(2*a[1][2]==(a[0][2]+a[2][2]))
+       {
+           cnt++;
+       }
+       map<int,int> m;
+       if((a[0][0]+a[2][2])%2==0)
+       {
+       m[a[0][0]+a[2][2]]++;
+       }
+       if((a[0][2]+a[2][0])%2==0)
+       {
+       m[a[0][2]+a[2][0]]++;
+       }
+       if((a[1][0]+a[1][2])%2==0)
+       {
+       m[a[1][0]+a[1][2]]++;
+       }
+       if((a[0][1]+a[2][1])%2==0)
+       {
+       m[a[0][1]+a[2][1]]++;
+       }
+       
+       int z=m.size();
+       int max=0;
+       for(auto x:m)
+       {
+           
+           if(x.second>=max)
+           {
+               max=x.second;
+           }
+       }
+       cnt+=max;
+       int curr=tt-t;
+       cout<<"Case #"<<curr<<": "<<cnt<<endl;
+   }
+   return 0;
+}

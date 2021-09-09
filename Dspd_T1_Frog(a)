@@ -1,0 +1,23 @@
+#include <stdio.h>
+int cnt=0;
+int climb(int n){
+      if(n<=0)
+      {
+       if(n==0)
+       {
+         cnt++;
+       }
+      }
+      else
+      {
+            return climb(n-1)+climb(n-2)+climb(n-3);
+      }
+}
+int main(void) {
+	int n=0;
+	scanf("%d",&n);
+	climb(n);
+	printf("%d",cnt);
+	return 0;
+}
+

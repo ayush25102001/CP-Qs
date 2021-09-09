@@ -10,7 +10,9 @@ int climb(int n){
       }
       else
       {
-            return climb(n-1)+climb(n-2)+climb(n-3);
+           climb(n-1);
+	   climb(n-2);
+	   climb(n-3);
       }
 }
 int main(void) {
